@@ -11,39 +11,45 @@ Regardless of the ordering, format, or type of data, if directly feeding data ar
 
 ## Versatile Data Type and Data Format
 User is free to choose the format of the data arrays specified with `format_func`.
-`format_func`:
-    A function that converts a PIL image to user's desired format.
-    The output must cast to a NumPy array (i.e. no error when running `np.array(format_func(PIL_img))`). See examples below.
-    Note that the internal computations are done using PIL functions or NumPy arrays and `format_func` is only designated for the user interface.
 
-    NumPy uint8 Example:
-        ```Python
-        format_func=lambda PIL_Image: np.array(PIL_Image, dtype=np.uint8)
-        ```
+`format_func` is a function that converts a PIL image to user's desired format.
+The output must cast to a NumPy array (i.e. no error when running `np.array(format_func(PIL_img))`). See examples below.
 
-    NumPy float16 Example:
-        ```Python
-        format_func=lambda PIL_Image: np.array(PIL_Image, dtype=np.float16)
-        ```
+Note that the internal computations are done using PIL functions or NumPy arrays and `format_func` is only designated for the user interface.
 
-    PyTorch float32 Example:
-        ```Python
-        import torch
-        format_func=lambda PIL_Image: torch.tensor(np.array(PIL_Image), dtype=torch.float32)
-        ```
+NumPy uint8 Example:
+
+```Python
+format_func=lambda PIL_Image: np.array(PIL_Image, dtype=np.uint8)
+```
+
+NumPy float16 Example:
+
+```Python
+format_func=lambda PIL_Image: np.array(PIL_Image, dtype=np.float16)
+```
+
+PyTorch float32 Example:
+
+```Python
+import torch
+format_func=lambda PIL_Image: torch.tensor(np.array(PIL_Image), dtype=torch.float32)
+```
 
 Example usage for a single image from the web:
-    ```Python
-    img = ezImage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
-    img.display()
-    ```
 
-Example usage for reading all PNG files in a directory:
-    ```Python
-    from pathlib import Path
-    path_parent = Path("/home/miladiouss/Pictures/Sample/")
-    pathList = list(path_parent.glob("*.png"))
-    imgList = [ezImage(p) for p in pathList]
-    for img in imgList:
-        img.display(print_name=True)
-    ```
+```Python
+img = ezImage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
+img.display()
+```
+
+## Example usage for reading all PNG files in a directory:
+
+```Python
+from pathlib import Path
+path_parent = Path("path/to/image/folder/")
+pathList = list(path_parent.glob("*.png"))
+imgList = [ezImage(p) for p in pathList]
+for img in imgList:
+    img.display(print_name=True)
+```
