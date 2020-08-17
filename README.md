@@ -1,6 +1,21 @@
 # ezImage
+
 ## What is ezImage?
 Load and display images and access its content data with one-liners. A wrapper for `PIL` and `IPython.display`, ideal for machine learning and image processing. Easily load a PNG/JPEG image from a local machine or the web and use its data in any desired format (e.g. NumPy/PyTorch/TensorFlow/etc). Display or save data arrays from any format or ordering (CHW/WCH). All with one-liners.
+
+## Installation
+
+```bash
+pip install ezImage
+```
+## Example Usage
+
+```Python
+from ezImage import ezImage
+img = ezImage('path/to/image.png')
+img.CHW
+```
+Watch this tutorial on [YouTube]() for a walk through.
 
 ## Description
 Enables the user to easily load an image from a path, a url, or by directly providing a data array.
@@ -46,6 +61,7 @@ img.display()
 ## Example usage for reading all PNG files in a directory:
 
 ```Python
+from ezImage import ezImage
 from pathlib import Path
 path_parent = Path("path/to/image/folder/")
 pathList = list(path_parent.glob("*.png"))
