@@ -12,7 +12,7 @@ pip install ezImage
 
 ```Python
 from ezImage import ezImage
-img = ezImage('path/to/image.png')
+img = ezImage(url='https://tinyurl.com/yyxvexs6')
 img.CHW
 ```
 Watch this tutorial on [YouTube]() for a walk through.
