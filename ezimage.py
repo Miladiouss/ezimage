@@ -4,7 +4,7 @@ from urllib.request import urlopen
 from IPython.display import display
 from pathlib import Path
 
-class ezImageCore():
+class ezimageCore():
     """
     A PIL wrapper that makes image processing and machine learning easier and more fun.
     Main advantages:
@@ -45,7 +45,7 @@ class ezImageCore():
 
         Example usage for a single image from the web:
             ```Python
-            img = ezImage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
+            img = ezimage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
             img.display()
             ```
 
@@ -54,7 +54,7 @@ class ezImageCore():
             from pathlib import Path
             path_parent = Path("/home/miladiouss/Pictures/Sample/")
             pathList = list(path_parent.glob("*.png"))
-            imgList = [ezImage(p) for p in pathList]
+            imgList = [ezimage(p) for p in pathList]
             for img in imgList:
                 img.display(print_name=True)
             ```
@@ -153,7 +153,7 @@ class ezImageCore():
         return display(self.image)
 
     def __repr__(self):
-        return f"ezImage of {self.path}"
+        return f"ezimage of {self.path}"
 
 
 def HWC_to_CHW(array):
@@ -162,9 +162,9 @@ def HWC_to_CHW(array):
 def CHW_to_HWC(array):
     return np.array(array).transpose((1, 2, 0))
 
-class ezImageCases(ezImageCore):
+class ezimageCases(ezimageCore):
     """
-    Handles different input cases for ezImageCore
+    Handles different input cases for ezimageCore
     """
     def __init__(self, input, format_func=np.array):
         # str case
@@ -172,16 +172,16 @@ class ezImageCases(ezImageCore):
             # url case
             if len(input) > 4:
                 if input[:4] == 'http':
-                    super(ezImageCases, self).__init__(url=input, format_func=format_func)
+                    super(ezimageCases, self).__init__(url=input, format_func=format_func)
                 # local path case
                 else:
-                    super(ezImageCases, self).__init__(path=input, format_func=format_func)
+                    super(ezimageCases, self).__init__(path=input, format_func=format_func)
             # local path case
             else:
-                super(ezImageCases, self).__init__(path=input, format_func=format_func)
+                super(ezimageCases, self).__init__(path=input, format_func=format_func)
         # pathlib case
         elif type(input) == type(Path("")):
-            super(ezImageCases, self).__init__(path=input, format_func=format_func)
+            super(ezimageCases, self).__init__(path=input, format_func=format_func)
         # data case
         else:
             try:
@@ -189,26 +189,26 @@ class ezImageCases(ezImageCore):
                 # RGB, and RGBA cases
                 if len(data.shape) == 3 or len(data.shape) == 4:
                     if data.shape[0] <= 4:
-                        super(ezImageCases, self).__init__(data_CHW=input, format_func=format_func)
+                        super(ezimageCases, self).__init__(data_CHW=input, format_func=format_func)
                     elif data.shape[-1] <= 4:
-                        super(ezImageCases, self).__init__(data_HWC=input, format_func=format_func)
+                        super(ezimageCases, self).__init__(data_HWC=input, format_func=format_func)
                     else:
                         raise ValueError('Condition: C <= 4 in CHW or HWC shapes')
                 # input grayscale
                 elif len(data.shape) == 2:
-                    super(ezImageCases, self).__init__(data_HWC=input, format_func=format_func)
+                    super(ezimageCases, self).__init__(data_HWC=input, format_func=format_func)
                 else:
                     raise ValueError('Shape of data array must have 2, or 3 elments. Accepted data arrays: CHW, HWC, HW')
             except ValueError:
                 print('`input` has to be a local path, a url, or data array castable to np.array.')
 
-class ezImage(ezImageCases):
+class ezimage(ezimageCases):
     """
     input: Can be one of the following format or a combination of them as a python list
         - path to a local file (string or pathlib)
         - url string starting with http or https
         - data array numpy or castable to numpy
-        If a list is provided, the class will return a list of ezImage instances.
+        If a list is provided, the class will return a list of ezimage instances.
 
     Enables the user to easily load an image from a path, a url, or by directly providing a data array.
     The properties enable the user to access the image data in R, G, B, A, GS (grayscale), HWC, and CHW formats.
@@ -241,7 +241,7 @@ class ezImage(ezImageCases):
 
     ## Example usage for a single image from the web:
         ```Python
-        img = ezImage("https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
+        img = ezimage("https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
         img.display()
         ```
     
@@ -257,7 +257,7 @@ class ezImage(ezImageCases):
         np.random.randint(0, 255, (123, 321, 4))]
 
 
-    for img in ezImage(inputList):
+    for img in ezimage(inputList):
         img.display() 
     ```
 
@@ -266,7 +266,7 @@ class ezImage(ezImageCases):
         from pathlib import Path
         path_parent = Path("path/to/image/folder/")
         pathList = list(path_parent.glob("*.png"))
-        for img in ezImage(pathList):
+        for img in ezimage(pathList):
             img.display() 
 
         ```
@@ -275,11 +275,11 @@ class ezImage(ezImageCases):
         if type(input) == list:
             pass
         else:
-            super(ezImage, self).__init__(input, format_func=np.array)
+            super(ezimage, self).__init__(input, format_func=np.array)
 
     def __new__(cls, input, format_func=np.array):
         if type(input) == list:
-            output = [ezImageCases(inp, format_func) for inp in input] 
+            output = [ezimageCases(inp, format_func) for inp in input] 
         else:
-            output = ezImageCases(input, format_func) #ezImageCases.__new__(cls, input, format_func=np.array)
+            output = ezimageCases(input, format_func) #ezimageCases.__new__(cls, input, format_func=np.array)
         return output

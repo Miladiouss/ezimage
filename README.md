@@ -1,24 +1,24 @@
-# ezImage
+# ezimage
 
-## What is ezImage?
+## What is ezimage?
 Load and display images and access its content data with one-liners. A wrapper for `PIL` and `IPython.display`, ideal for machine learning and image processing. Easily load a PNG/JPEG image (or a list of them) from a local machine or the web and use its data in any desired format (e.g. NumPy/PyTorch/TensorFlow/etc). Display or save data arrays from any format or ordering (`CHW`/`WCH`). All with one-liners.
 
 ## Installation
 
 ```bash
-pip install ezImage
+pip install ezimage
 ```
 ## Example Usage
 
 ```Python
-from ezImage import ezImage
-img = ezImage(url='https://tinyurl.com/yyxvexs6')
+from ezimage import ezimage
+img = ezimage(url='https://tinyurl.com/yyxvexs6')
 img.CHW
 ```
 Watch this tutorial on [YouTube]() for a walk through.
 
 ## Description
-Enables the user to easily load an image from a path, a url, or by directly providing a data array. If a list is provided, a list of ezImage instances will be retunred.
+Enables the user to easily load an image from a path, a url, or by directly providing a data array. If a list is provided, a list of ezimage instances will be retunred.
 The properties enable the user to access the image data in R, G, B, A, GS (grayscale), HWC, and CHW formats.
 In IPython environments such as in Jupyter, the `display` method allows the user to view images. Unlike PIL, this method allows for iterative image display.
 
@@ -54,18 +54,18 @@ format_func=lambda PIL_Image: torch.tensor(np.array(PIL_Image), dtype=torch.floa
 Example usage for a single image from the web:
 
 ```Python
-img = ezImage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
+img = ezimage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
 img.display()
 ```
 
 ## Example usage for reading all PNG files in a directory:
 
 ```Python
-from ezImage import ezImage
+from ezimage import ezimage
 from pathlib import Path
 path_parent = Path("path/to/image/folder/")
 pathList = list(path_parent.glob("*.png"))
-imgList = [ezImage(p) for p in pathList]
+imgList = [ezimage(p) for p in pathList]
 for img in imgList:
     img.display(print_name=True)
 ```
