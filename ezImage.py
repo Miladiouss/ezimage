@@ -166,7 +166,7 @@ class ezImageCases(ezImageCore):
     """
     Handles different input cases for ezImageCore
     """
-    def __init__(self, input, data_HWC=None, data_CHW=None, format_func=np.array):
+    def __init__(self, input, format_func=np.array):
         # str case
         if type(input) == str:
             # url case
@@ -277,9 +277,9 @@ class ezImage(ezImageCases):
         else:
             super(ezImage, self).__init__(input, format_func=np.array)
 
-    def __new__(cls, input, *args, **kwargs):
+    def __new__(cls, input, format_func=np.array):
         if type(input) == list:
-            output = [ezImageCases(inp) for inp in input] 
+            output = [ezImageCases(inp, format_func) for inp in input] 
         else:
-            output = ezImageCases.__new__(cls, *args, **kwargs)
+            output = ezImageCases(input, format_func) #ezImageCases.__new__(cls, input, format_func=np.array)
         return output
