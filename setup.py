@@ -3,7 +3,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
      name='ezImage',
-     version='0.3',
+     version='0.4',
      scripts=['ezImage'] ,
      author="Milad Pourrahmani (Miladiouss)",
      author_email="miladiouss@gmail.com",

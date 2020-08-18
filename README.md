@@ -1,7 +1,7 @@
 # ezImage
 
 ## What is ezImage?
-Load and display images and access its content data with one-liners. A wrapper for `PIL` and `IPython.display`, ideal for machine learning and image processing. Easily load a PNG/JPEG image from a local machine or the web and use its data in any desired format (e.g. NumPy/PyTorch/TensorFlow/etc). Display or save data arrays from any format or ordering (`CHW`/`WCH`). All with one-liners.
+Load and display images and access its content data with one-liners. A wrapper for `PIL` and `IPython.display`, ideal for machine learning and image processing. Easily load a PNG/JPEG image (or a list of them) from a local machine or the web and use its data in any desired format (e.g. NumPy/PyTorch/TensorFlow/etc). Display or save data arrays from any format or ordering (`CHW`/`WCH`). All with one-liners.
 
 ## Installation
 
@@ -18,7 +18,7 @@ img.CHW
 Watch this tutorial on [YouTube]() for a walk through.
 
 ## Description
-Enables the user to easily load an image from a path, a url, or by directly providing a data array.
+Enables the user to easily load an image from a path, a url, or by directly providing a data array. If a list is provided, a list of ezImage instances will be retunred.
 The properties enable the user to access the image data in R, G, B, A, GS (grayscale), HWC, and CHW formats.
 In IPython environments such as in Jupyter, the `display` method allows the user to view images. Unlike PIL, this method allows for iterative image display.
 
