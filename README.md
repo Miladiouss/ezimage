@@ -12,8 +12,9 @@ pip install ezimage
 
 ```Python
 from ezimage import ezimage
-img = ezimage(url='https://tinyurl.com/yyxvexs6')
+img = ezimage('https://tinyurl.com/yyxvexs6')
 img.CHW
+img.display()
 ```
 Watch this tutorial on [YouTube]() for a walk through.
 
@@ -54,7 +55,7 @@ format_func=lambda PIL_Image: torch.tensor(np.array(PIL_Image), dtype=torch.floa
 Example usage for a single image from the web:
 
 ```Python
-img = ezimage(url="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
+img = ezimage("https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Omar_Khayyam2.JPG/220px-Omar_Khayyam2.JPG")
 img.display()
 ```
 
